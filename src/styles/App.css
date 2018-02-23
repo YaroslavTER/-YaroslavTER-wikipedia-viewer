@@ -1,0 +1,31 @@
+.container {
+  background: rgba(255, 255, 255, 0.5);
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  margin-top: 10em;
+  font-size: 30px;
+  font-weight: bold;
+  color: #444;
+}
+
+.preview-header {
+  font-weight: bold;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+#spinner {
+  font-size: 20px;
+}
+
+.header,
+#previews {
+  padding-bottom: 20px;
+}
