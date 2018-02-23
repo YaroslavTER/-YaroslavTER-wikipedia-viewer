@@ -6,20 +6,17 @@ export class Input extends Component {
     return (
       <div class="input-group mb-3">
         <input
-          id="searchQuery"
-          type="input"
+          type="search"
           class="form-control"
-          placeholder="Search article"
-          aria-label="Recipient's username"
+          placeholder="Search articles..."
+          aria-label="Search articles..."
           aria-describedby="basic-addon2"
         />
-        <button
-          id="search"
-          class="input-group-addon btn btn-outline-secondary"
-          type="button"
-        >
-          <i class="fa fa-search" />
-        </button>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">
+            <i class="fa fa-search" />
+          </button>
+        </div>
       </div>
     );
   }
