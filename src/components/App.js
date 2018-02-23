@@ -8,7 +8,7 @@ import { PreviewList } from "./PreviewList";
 class App extends Component {
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <Header />
 
         <Input />

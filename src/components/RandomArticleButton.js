@@ -6,11 +6,11 @@ export class RandomArticleButton extends Component {
     return (
       <div id="randomArticle">
         <a
-          class="btn btn-outline-secondary"
+          className="btn btn-outline-secondary"
           href="https://en.wikipedia.org/wiki/Special:Random"
           target="_blank"
         >
-          <i class="fa fa-random" /> Get Article
+          <i className="fa fa-random" /> Get Article
         </a>
       </div>
     );
