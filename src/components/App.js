@@ -12,10 +12,6 @@ class App extends Component {
         <Header />
 
         <Input />
-
-        <RandomArticleButton />
-
-        <PreviewList />
       </div>
     );
   }

@@ -7,6 +7,7 @@ export class Preview extends Component {
       <a
         href={this.props.link}
         className="card bg-light text-dark mt-3"
+        rel="noopener noreferrer"
         target="_blank"
       >
         <div className="card-body">

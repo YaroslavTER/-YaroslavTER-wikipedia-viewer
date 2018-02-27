@@ -5,17 +5,19 @@ import { WikiAPI } from "../api/WikiAPI";
 import { ProcessJSON } from "../api/ProcessJSON";
 
 export class PreviewList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
+    console.log(this.props);
     this.state = {
       previews: []
     };
   }
 
-  componentDidMount() {
-    let searchQuery = encodeURIComponent("qwerty");
-    fetch("https://cors-anywhere.herokuapp.com/" + WikiAPI.url + searchQuery)
+  handleClick() {
+    let searchQuery = encodeURIComponent(this.props.searchRequest);
+    console.log(searchQuery);
+    fetch(WikiAPI.url + searchQuery)
       .then(result => result.json())
       .then(json => {
         let data = ProcessJSON.makePrettyer(json);
