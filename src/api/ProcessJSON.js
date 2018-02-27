@@ -1,12 +1,5 @@
-export const APIData = {
-  search: {
-    request: "qwerty",
-    query: encodeURIComponent(this.search.request)
-  },
-  url:
-    "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" +
-    this.search.query,
-  makePrettyer(json) {
+export const ProcessJSON = {
+  makePrettyer: json => {
     let previews = [];
 
     json.map((subArray, index) => {
