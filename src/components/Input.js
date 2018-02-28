@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../styles/App.css";
-
+import { WikiAPI } from "../api/WikiAPI";
+import { ProcessJSON } from "../api/ProcessJSON";
+import { Preview } from "./Preview";
 import { RandomArticleButton } from "./RandomArticleButton";
 import { PreviewList } from "./PreviewList";
 
@@ -9,13 +11,30 @@ export class Input extends Component {
     super();
 
     this.state = {
-      searchRequest: ""
+      previews: []
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.setState({ searchRequest: document.getElementById("request").value });
+    let searchQuery = document.getElementById("request").value;
+    console.log(searchQuery);
+    fetch(WikiAPI.url + encodeURIComponent(searchQuery))
+      .then(result => result.json())
+      .then(json => {
+        let data = ProcessJSON.makePrettyer(json);
+        let previews = data.map((preview, i) => {
+          return (
+            <Preview
+              key={preview.name + i}
+              name={preview.name}
+              description={preview.description}
+              link={preview.link}
+            />
+          );
+        });
+        this.setState({ previews: previews });
+      });
   }
 
   render() {
@@ -42,7 +61,7 @@ export class Input extends Component {
         </div>
 
         <RandomArticleButton />
-        <PreviewList searchRequest={this.state.searchRequest} />
+        <PreviewList previews={this.state.previews} />
       </div>
     );
   }
