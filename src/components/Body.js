@@ -17,24 +17,25 @@ export class Body extends Component {
     this.onKeyPress = this.onKeyPress.bind(this);
   }
 
-  handleClick() {
+  async handleClick() {
     let searchQuery = document.getElementById("request").value;
-    fetch(WikiAPI.url + encodeURIComponent(searchQuery))
-      .then(result => result.json())
-      .then(json => {
-        let data = ProcessJSON.makePrettyer(json);
-        let previews = data.map((preview, i) => {
-          return (
-            <Preview
-              key={preview.name + i}
-              name={preview.name}
-              description={preview.description}
-              link={preview.link}
-            />
-          );
-        });
-        this.setState({ previews: previews });
-      });
+    const pageList = await WikiAPI.getPages(encodeURIComponent(searchQuery));
+    this.renderPreviews(pageList);
+  }
+
+  renderPreviews(pageList) {
+    let data = ProcessJSON.makePrettyer(pageList);
+    let previews = data.map((preview, i) => {
+      return (
+        <Preview
+          key={preview.name + i}
+          name={preview.name}
+          description={preview.description}
+          link={preview.link}
+        />
+      );
+    });
+    this.setState({ previews: previews });
   }
 
   onKeyPress(event) {
