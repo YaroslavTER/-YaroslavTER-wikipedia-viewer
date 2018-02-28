@@ -1,7 +1,6 @@
 export const ProcessJSON = {
   makePrettyer: json => {
     let previews = [];
-
     json.map((subArray, index) => {
       switch (index) {
         case 1:
@@ -23,7 +22,6 @@ export const ProcessJSON = {
           break;
       }
     });
-
     return previews;
   }
 };

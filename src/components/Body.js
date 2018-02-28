@@ -6,7 +6,7 @@ import { Preview } from "./Preview";
 import { RandomArticleButton } from "./RandomArticleButton";
 import { PreviewList } from "./PreviewList";
 
-export class Input extends Component {
+export class Body extends Component {
   constructor() {
     super();
 
@@ -14,11 +14,11 @@ export class Input extends Component {
       previews: []
     };
     this.handleClick = this.handleClick.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   handleClick() {
     let searchQuery = document.getElementById("request").value;
-    console.log(searchQuery);
     fetch(WikiAPI.url + encodeURIComponent(searchQuery))
       .then(result => result.json())
       .then(json => {
@@ -37,6 +37,12 @@ export class Input extends Component {
       });
   }
 
+  onKeyPress(event) {
+    if (event.key === "Enter") {
+      this.handleClick();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -45,6 +51,7 @@ export class Input extends Component {
             id="request"
             type="search"
             className="form-control"
+            onKeyPress={this.onKeyPress}
             placeholder="Search articles..."
             aria-label="Search articles..."
             aria-describedby="basic-addon2"
