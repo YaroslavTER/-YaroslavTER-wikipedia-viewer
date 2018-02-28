@@ -17,8 +17,16 @@ export class Body extends Component {
     this.onKeyPress = this.onKeyPress.bind(this);
   }
 
-  async handleClick() {
+  handleClick() {
     let searchQuery = document.getElementById("request").value;
+    if (searchQuery) {
+      this.pullPagesData(searchQuery);
+    } else {
+      this.setState({ previews: null });
+    }
+  }
+
+  async pullPagesData(searchQuery) {
     const pageList = await WikiAPI.getPages(encodeURIComponent(searchQuery));
     this.renderPreviews(pageList);
   }
