@@ -6,24 +6,26 @@ import { Preview } from "./Preview";
 import { RandomArticleButton } from "./RandomArticleButton";
 import { PreviewList } from "./PreviewList";
 import { NotFound } from "./NotFound";
+import { Loader } from "./Loader";
 
 export class Body extends Component {
   constructor() {
     super();
 
     this.state = {
-      previews: []
+      searchResult: []
     };
     this.handleClick = this.handleClick.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   handleClick() {
+    this.setState({ searchResult: <Loader /> });
     let searchQuery = document.getElementById("request").value;
     if (searchQuery) {
       this.pullPagesData(searchQuery);
     } else {
-      this.setState({ previews: null });
+      this.setState({ searchResult: null });
     }
   }
 
@@ -50,7 +52,7 @@ export class Body extends Component {
     } else {
       previews = <NotFound />;
     }
-    this.setState({ previews: previews });
+    this.setState({ searchResult: previews });
   }
 
   onKeyPress(event) {
@@ -85,7 +87,7 @@ export class Body extends Component {
         </div>
 
         <RandomArticleButton />
-        <PreviewList previews={this.state.previews} />
+        <PreviewList previews={this.state.searchResult} />
       </div>
     );
   }
