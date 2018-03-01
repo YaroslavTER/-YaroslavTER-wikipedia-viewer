@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "../styles/App.css";
-import { WikiAPI } from "../api/WikiAPI";
+import { WikiPages } from "../api/WikiPages";
 import { ProcessJSON } from "../api/ProcessJSON";
 import { Preview } from "./Preview";
 import { RandomArticleButton } from "./RandomArticleButton";
 import { PreviewList } from "./PreviewList";
+import { NotFound } from "./NotFound";
 
 export class Body extends Component {
   constructor() {
@@ -27,22 +28,28 @@ export class Body extends Component {
   }
 
   async pullPagesData(searchQuery) {
-    const pageList = await WikiAPI.getPages(encodeURIComponent(searchQuery));
+    let encodedSearchQuery = encodeURIComponent(searchQuery);
+    let pageList = await WikiPages.getPages(encodedSearchQuery);
     this.renderPreviews(pageList);
   }
 
   renderPreviews(pageList) {
     let data = ProcessJSON.makePrettyer(pageList);
-    let previews = data.map((preview, i) => {
-      return (
-        <Preview
-          key={preview.name + i}
-          name={preview.name}
-          description={preview.description}
-          link={preview.link}
-        />
-      );
-    });
+    let previews;
+    if (data.length > 0) {
+      previews = data.map((preview, i) => {
+        return (
+          <Preview
+            key={preview.name + i}
+            name={preview.name}
+            description={preview.description}
+            link={preview.link}
+          />
+        );
+      });
+    } else {
+      previews = <NotFound />;
+    }
     this.setState({ previews: previews });
   }
 
@@ -64,6 +71,7 @@ export class Body extends Component {
             placeholder="Search articles..."
             aria-label="Search articles..."
             aria-describedby="basic-addon2"
+            autoFocus
           />
           <div className="input-group-append">
             <button
