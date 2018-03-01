@@ -34,6 +34,11 @@ a:visited {
   animation: spin 2s linear infinite;
 }
 
+.header,
+#previews {
+  padding-bottom: 20px;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {
@@ -51,9 +56,4 @@ a:visited {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.header,
-#previews {
-  padding-bottom: 20px;
 }
