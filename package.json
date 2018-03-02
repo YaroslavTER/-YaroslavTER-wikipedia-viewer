@@ -1,5 +1,6 @@
 {
   "name": "wikipedia-viewer",
+  "homepage": "https://yaroslavter.github.io/wikipedia-viewer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
